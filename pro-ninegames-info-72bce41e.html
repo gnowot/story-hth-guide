@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>关于九游 · 资料索引与归档</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2f7fb;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      color: #1a2f3b;
+      padding: 24px 16px 40px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .page {
+      max-width: 780px;
+      width: 100%;
+    }
+
+    /* 开场短句 — 低调的引子 */
+    .opener {
+      margin-top: 12px;
+      margin-bottom: 20px;
+      padding: 12px 16px 8px;
+      border-left: 4px solid #3498a8;
+      background: #eaf4f6;
+      border-radius: 0 12px 12px 0;
+    }
+
+    .opener p {
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+      color: #1e3b47;
+    }
+
+    .opener .small-meta {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.78rem;
+      color: #4f727c;
+      opacity: 0.75;
+    }
+
+    /* 主标题 — 克制叙述感 */
+    h1 {
+      font-weight: 480;
+      font-size: 1.9rem;
+      margin: 12px 0 8px;
+      letter-spacing: -0.02em;
+      color: #1f4755;
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 0;
+    }
+
+    h1 small {
+      font-size: 1rem;
+      font-weight: 350;
+      color: #4e7a88;
+      margin-left: 10px;
+      letter-spacing: 0.2px;
+    }
+
+    /* 承接段落 — 像笔记本上的笔记 */
+    .note-block {
+      background: white;
+      padding: 22px 20px 18px;
+      margin: 24px 0 28px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(40, 100, 115, 0.06);
+      border: 1px solid #dce8ec;
+    }
+
+    .note-block p {
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    .note-block p:last-child {
+      margin-bottom: 0;
+    }
+
+    .inset-link {
+      background: #e1f0f3;
+      padding: 2px 8px;
+      border-radius: 24px;
+      white-space: nowrap;
+      transition: background 0.2s;
+      font-weight: 420;
+    }
+
+    .inset-link a {
+      text-decoration: none;
+      color: #1d5b6c;
+    }
+
+    .inset-link a:hover {
+      background: #c9e1e8;
+    }
+
+    /* 特点列表 — 网格卡片 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 14px;
+      margin: 32px 0 22px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 18px 14px 14px;
+      box-shadow: 0 6px 14px rgba(33, 100, 120, 0.04);
+      border: 1px solid #d5e4e9;
+      transition: all 0.15s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 10px 18px rgba(28, 95, 112, 0.07);
+      border-color: #a7cbd6;
+      transform: translateY(-2px);
+    }
+
+    .card .emoji-marker {
+      font-size: 1.3rem;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .card h3 {
+      font-size: 1rem;
+      font-weight: 520;
+      margin: 8px 0 4px;
+      color: #1d3f4b;
+      letter-spacing: 0.01em;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: #2f5360;
+      line-height: 1.45;
+    }
+
+    /* 温和的引用/提示区块 */
+    .gentle-hint {
+      margin: 28px 0 24px;
+      padding: 14px 18px;
+      background: #f6fbfc;
+      border-radius: 40px 12px 40px 12px;
+      border: 1px dashed #95bcc9;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .gentle-hint span {
+      font-size: 1.2rem;
+    }
+
+    .gentle-hint .hint-text {
+      flex: 1;
+      font-size: 0.93rem;
+      color: #1f4452;
+    }
+
+    /* FAQ 摘要 — 折叠感 */
+    .faq-mini {
+      background: #ffffffdd;
+      backdrop-filter: blur(2px);
+      padding: 8px 0 4px;
+      margin: 20px 0 10px;
+    }
+
+    .faq-item {
+      border-bottom: 1px solid #d0e0e6;
+      padding: 14px 12px;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-q {
+      font-weight: 460;
+      color: #1f4a58;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+
+    .faq-q::before {
+      content: "◈";
+      color: #2f7f8f;
+      font-size: 0.8rem;
+    }
+
+    .faq-a {
+      padding-left: 22px;
+      font-size: 0.9rem;
+      color: #2c5b6a;
+    }
+
+    /* 结尾 */
+    .closing {
+      margin-top: 36px;
+      padding: 16px 12px 10px;
+      border-top: 1px solid #c7dae1;
+      font-size: 0.9rem;
+      color: #3c6877;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .closing small {
+      font-size: 0.78rem;
+      color: #6e92a0;
+    }
+
+    /* 移动端细节 */
+    @media (max-width: 520px) {
+      body {
+        padding: 16px 12px 32px;
+      }
+
+      h1 {
+        font-size: 1.6rem;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        padding: 14px 12px;
+      }
+
+      .gentle-hint {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+      }
+    }
+
+    @media (min-width: 600px) {
+      .opener {
+        padding-left: 28px;
+      }
+    }
+
+    /* 低交互点缀 */
+    hr {
+      border: none;
+      border-top: 1px solid #cfe1e8;
+      margin: 16px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- 开场短句 -->
+    <div class="opener">
+      <p>一个关于资料整理、版本痕迹与索引偏好的地方。没有太多修辞，只是把相关的内容按顺序摆好。</p>
+      <span class="small-meta">—— 基于公开信息与用户笔记 · 2025</span>
+    </div>
+
+    <!-- 标题 + 简述 -->
+    <h1>
+      九游 · 索引归档
+      <small>信息碎片与线索</small>
+    </h1>
+
+    <!-- 承接段落：带着叙述感的信息梳理 -->
+    <div class="note-block">
+      <p>
+        从零散链接到结构化条目，这个过程本身就像整理一个书架。几周前我开始把与<a href="https://pro-ninegames.com" style="text-decoration: none; color: #1f7a8c; font-weight: 450;">九游</a>相关的页面、文档和社区讨论收集到一起，按主题做了粗分类。谈不上全面，但每个条目背后都有对应的原始出处。
+      </p>
+      <p>
+        这里不打算做二次创作或过度解读，只希望保留一种“可查阅”的状态。如果你也在寻找类似的信息脉络，或许能从这里找到起点。
+      </p>
+    </div>
+
+    <!-- 特点列表：网格卡片 -->
+    <div style="margin: 8px 0 0; font-size: 0.92rem; color: #2b5c6c;">以下为归档过程中逐渐浮现的几个特征维度</div>
+    <div class="feature-grid">
+
+      <div class="card">
+        <div class="emoji-marker">📋</div>
+        <h3>分类目录</h3>
+        <p>按版本、功能、公告三个一级类目排列，每一条都附带时间戳和原始来源。</p>
+      </div>
+
+      <div class="card">
+        <div class="emoji-marker">🔗</div>
+        <h3>交叉引用</h3>
+        <p>同一信息在不同页面中的表述差异会被标记，方便对比与追溯。</p>
+      </div>
+
+      <div class="card">
+        <div class="emoji-marker">🧩</div>
+        <h3>变化记录</h3>
+        <p>页面结构、文案、链接指向的细微调整都有快照，不评价好坏，只记录事实。</p>
+      </div>
+
+      <div class="card">
+        <div class="emoji-marker">📎</div>
+        <h3>上下文保留</h3>
+        <p>尽量保留截图、原文片段和发布时间，避免脱离语境的理解偏差。</p>
+      </div>
+
+    </div>
+
+    <!-- 一个温和的提示区块，嵌入自然引用 -->
+    <div class="gentle-hint">
+      <span>⏳</span>
+      <div class="hint-text">
+        目前归档范围集中在近一年的公开页面，如果需要更早的资料，可以留意 <a href="https://pro-ninegames.com" style="text-decoration: none; color: #1a6b7d; font-weight: 440;">九游</a> 自身的信息沉淀区域，那里保留着更完整的版本脉络。
+      </div>
+    </div>
+
+    <!-- FAQ 摘要 — 列举三个常见的资料查阅问题 -->
+    <div class="faq-mini">
+      <div class="faq-item">
+        <div class="faq-q">哪些内容被收录了？</div>
+        <div class="faq-a">主要是站点内的静态说明、公告、功能介绍以及部分社区索引贴。不收录第三方内容或非公开信息。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">归档的频率与依据？</div>
+        <div class="faq-a">不定期，当检测到页面结构或关键表述变化后会补充快照。每次更新会注明改动范围。</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">链接失效或变更怎么办？</div>
+        <div class="faq-a">会保留失效前的页面截图与文字备份，并在备注里标注变更日期。你可以通过存档页面查看当时的内容。</div>
+      </div>
+    </div>
+
+    <!-- 温和结尾 -->
+    <div class="closing">
+      <div>以上只是一次阶段性的整理，不追求全面，只求每个条目都有来处。</div>
+      <div style="margin-top: 2px;">如果对某个索引线索有疑问，或许回到 <a href="https://pro-ninegames.com" style="text-decoration: none; color: #2f7f8f; font-weight: 450;">九游</a> 本身，反而能找到更直接的答案。</div>
+      <small>页面生成时间：2025 · 索引版本 · beta</small>
+    </div>
+
+  </div>
+</body>
+</html>
